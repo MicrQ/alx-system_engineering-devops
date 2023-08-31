@@ -1,2 +1,2 @@
 #!/bin/bash
-vlc "StarWars IV"
+mpv "StarWars IV"
