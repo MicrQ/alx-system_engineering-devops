@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# a script that prints all the ip address with their status code
+log="apache-access.log"
+awk '{print $1, $9}' "$log"
