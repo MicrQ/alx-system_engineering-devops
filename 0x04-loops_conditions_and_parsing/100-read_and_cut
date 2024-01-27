@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# reading from /etc/passwd and printing username:uid:home
+while read -r file
+do
+    echo "$file" | cut -d ":" -f1,2,6
+done < "/etc/passwd"
