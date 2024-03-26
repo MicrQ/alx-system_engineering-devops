@@ -13,6 +13,6 @@ curl: (52) Empty reply from server
 
 Here we can see that after starting my Docker container, I curl the port `8080` mapped to the Docker container port 80, it does not return a page but an error message. Note that you might also get the error message `curl: (52) Empty reply from server`.
 
-After executing `service apache start`, The problem is fixed. The file <b>0-give_me_a_page</b> contains the command I executed to fix the problem.
+After executing `./0-give_me_a_page`, The problem is fixed. The script <b>0-give_me_a_page</b> contains the command I executed to fix the problem.
 
 # `DoHardThings`
