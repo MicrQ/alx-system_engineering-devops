@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# a bash script that installs Nginx server and configures it
+# to redirect to another page(to my linkedin profile).
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://www.linkedin.com/in/abenetg permanent;" /etc/nginx/sites-enabled/default
+sudo service nginx restart
