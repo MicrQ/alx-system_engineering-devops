@@ -3,19 +3,18 @@ package { 'nginx':
     ensure => installed,
 }
 
-file_line { 'redirect':
+file_line { '_redirect':
     ensure => 'present',
-    path   => '/etc/nginx/sites-enabled/default',
+    path   => '/etc/nginx/sites-available/default',
     after  => 'listen 80 default_server;',
-    line   => 'rewrite ^/redirect_me www.linkedin.com/in/abenetg permanent;',
+    line   => 'rewrite ^/redirect_me https://www.linkedin.com/in/abenetg permanent;',
 }
 
-file { '/var/www/html/index.nginx-debian.html':
-    ensure  => 'present',
+file { '/var/www/html/index.html':
     content => 'Hello World!',
 }
 
 service { 'nginx':
     ensure  => 'running',
-    require => package['nginx'],
+    require => Package['nginx'],
 }
