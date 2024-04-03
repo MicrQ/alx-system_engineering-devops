@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# a script that installs Nginx server and creates a custom 404 file for it.
+sudo apt-get update -y
+sudo apt-get install nginx -y
+
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://www/linkedin.com/in/abenetg permanent;" /etc/nginx/sites-enabled/default
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
+sudo sed -i "37i error_page 404 /404.html;\n location = /404.html {\n root /var/www/html;\n internal;\n}\n" /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
