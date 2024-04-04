@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # a bash script that fixes Nginx server that fails to listen on port 80.
-sudo sed -i "0,/listen/{s/listen/listen 80 default_server; # /}" /etc/nginx/sites-enabled/default
+sudo sed -i s/8080/80/g /etc/nginx/sites-enabled/default
