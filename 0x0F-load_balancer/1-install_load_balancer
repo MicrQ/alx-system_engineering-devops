@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# a bash script that installs HAProxy and creates a load balancer.
+sudo apt-get update -y
+sudo apt-get install haproxy -y
+
+sudo sed -i "/errorfile 504 /a frontend frontend_conf\n\tbind *:80\n\tmode http\n\tuse_backend backend_conf\n\nbackend backend_conf\n\tbalance roundrobin\n\tserver 516694-web-01 18.204.8.72:80 check\n\tserver 516694-web-02 54.160.83.215:80 check\n" /etc/haproxy/haproxy.cfg
+sudo service haproxy restart
