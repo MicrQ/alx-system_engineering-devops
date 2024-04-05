@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# a bash script that defines a function to audit a website and uses it.
+# The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
+myDomain() {
+    if [ "$2" ]; then
+        echo -n "The subdomain $2 is a ";
+        dig "$2.$1" | grep -A1 "ANSWER SECTION:" | tail -1 | awk '{print $4" record and points to "$5}';
+    else
+        for sub in www lb-01 web-01 web-02; do
+            echo -n "The subdomain $sub is a ";
+            dig $sub."$1" | grep -A1 "ANSWER SECTION:" | tail -1 | awk '{print $4" record and points to "$5}';
+        done
+    fi
+}
+# calling the function with command line arguments
+myDomain "$1" "$2"
