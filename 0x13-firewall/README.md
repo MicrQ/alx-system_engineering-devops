@@ -13,4 +13,14 @@ This project is part of <b>ALX Software Engineering Program.</b> It is all about
 * and Everything I should know about UFW.
 
 
+## What to do?
+
+The file <a href="https://github.com/MicrQ/alx-system_engineering-devops/blob/master/0x13-firewall/0-block_all_incoming_traffic_but">0-block_all_incoming_traffic_but</a> contains the UFW command you should run right after you install UFW using `sudo apt-get install ufw -y` command.
+`BE CAREFULL`: if you do not run the command immediately, You may got locked out of your server and may not be able to connect using SSH.
+
+The file <a href="https://github.com/MicrQ/alx-system_engineering-devops/blob/master/0x13-firewall/100-port_forwarding">100-port_forwarding</a> contains the UFW's `before.rules` content which is located in `/etc/ufw/before.rules`.
+The first four lines added to forward any incoming traffic from port 8080 to 80. After addind those lines, to reload the UFW is required.
+Use the command `sudo ufw reload` to reload the UFW.
+
+
 ## DoHardThings! - ALX
