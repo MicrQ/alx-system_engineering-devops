@@ -10,4 +10,12 @@ You can check the permission of the user by running `mysql -uholberton_user -p -
 In order for you to set up replication, you’ll need to have a database with at least one table and one row in your primary MySQL server (web-01) to replicate from. 
 The script <a href="https://github.com/MicrQ/alx-system_engineering-devops/blob/master/0x14-mysql/createDatabase.sh">createDatabase.sh</a> creates a database named `tyrell_corp` and a table `nexus6` in the database. It also grants the user 'holberton_user' a select permission.<br>
 To check if the user `holberton_user` have the permission to select, run: `mysql -uholberton_user -p -e "use tyrell_corp; select * from nexus6"` on web-01.<br><br>
-To create a replica slave and everything related, checkout the file <a href="https://github.com/MicrQ/alx-system_engineering-devops/blob/master/0x14-mysql/createReplicaUserREADME">createReplicaUserREADME</a>
+To create a replica slave and everything related, checkout the file <a href="https://github.com/MicrQ/alx-system_engineering-devops/blob/master/0x14-mysql/createReplicaUserREADME">createReplicaUserREADME</a><br><br>
+
+### Finally
+What if the data center where both your primary and replica database servers are hosted are down because of a power outage or even worse: flooding, fire? Then all your data would inaccessible or lost. That’s why you want to backup and store them in a different system in another physical location. This can be achieved by dumping your MySQL data, compressing them and storing them in a different data center.<br>
+The bash script <a href="https://github.com/MicrQ/alx-system_engineering-devops/blob/master/0x14-mysql/5-mysql_backup">5-mysql_backup</a> will help you do that. 
+#### Usage: 
+`./5-mysql_backup < password of mysql root user >` <br><br>
+
+### DoHardThings!  - ALX
