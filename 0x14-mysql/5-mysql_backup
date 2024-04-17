@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# a bash script that creates a backup of all my databases and compresses them to .tar.gz file
+sudo mysqldump -uroot -p"$1" -A | tee backup.sql > /dev/null
+tar -czf backup.tar backup.sql
+gzip backup.tar
+mv backup.tar.gz "$(date +'%d-%m-%y').tar.gz"
