@@ -1,0 +1,50 @@
+-- this sql script create a replica user named 'replica_user'
+-- with the host name same to '%'(any host) and password.
+-- and It grants a select permission on 'mysql.user' to the user 'holberton_user'
+--
+-- NOTE: before running the following script, make sure your web-01's firewall
+--       allows incoming traffic from web-02 on port 3306.
+--       To do so, run: sudo ufw allow from <ip of web-02> to any port 3306
+-- EDIT THE /etc/mysql/mysql.d/mysqld.cnf FILE
+CREATE USER IF NOT EXISTS 'replica_user'@'%' IDENTIFIED BY "dohardthings";
+GRANT REPLICATION SLAVE ON *.* TO 'replica_user'@'%';
+FLUSH PRIVILEGES; -- this command will free the memory that has been cached by the above commands
+FLUSH TABLES WITH READ LOCK; -- closes every table in every database that is being read
+SHOW MASTER STATUS; -- will display the status of the master database. record the File name and Position of the database that is needed to replicate
+-- 
+-- Now, open another terminal in the source server and run
+-- $ sudo mysqldump -u root tyrell_corp > tyrell_corp.sql
+-- the above code will create the copy of the database 'tyrell_corp'.
+UNLOCK TABLES; -- makes the tables writable.
+--
+-- now copy the the .sql file to the replica server's /tmp/ using the scp command.
+-- after that go to the replica server and create a database with the same name as the .sql file and
+-- run the following command to import the .sql file's content to the database
+-- sudo mysql tyrell_corp < /tmp/tyrell_corp.sql
+--
+-- EDIT THE /etc/mysql/mysql.d/mysqld.cnf FILE OF THE SLAVE SERVER
+-- add the following at the end of the file: relay-log  = /var/mysql/mysql-relay-bin.log
+-- restart the mysql service
+-- Now run the following commands on your replica's mysql server 
+-- CHANGE REPLICATION SOURCE TO # this commands are for mysql new versions
+--     -> SOURCE_HOST='source_server_ip', # this commands are for mysql new versions
+--     -> SOURCE_USER='replica_user', # this commands are for mysql new versions
+--     -> SOURCE_PASSWORD='password', # this commands are for mysql new versions
+--     -> SOURCE_LOG_FILE='mysql-bin.000001', # this commands are for mysql new versions
+--     -> SOURCE_LOG_POS=899; # this commands are for mysql new versions
+CHANGE MASTER TO
+-> MASTER_HOST='18.204.8.72',
+-> MASTER_USER='replica_user',
+-> MASTER_PASSWORD='dohardthings',
+-> MASTER_LOG_FILE='mysql-bin.000242',
+-> MASTER_LOG_POS=777;
+--
+-- then run 
+START SLAVE
+
+-- Now grant the user holberton_user a select permission on
+-- mysql.user to check if the replica_user is created correctly
+GRANT SELECT ON mysql.user TO 'holberton_user'@'localhost';
+--
+-- BRAVO! EVERYTHING IS WORKING NOW!!!
+
