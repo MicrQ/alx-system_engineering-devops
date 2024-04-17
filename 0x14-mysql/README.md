@@ -10,3 +10,4 @@ You can check the permission of the user by running `mysql -uholberton_user -p -
 In order for you to set up replication, you’ll need to have a database with at least one table and one row in your primary MySQL server (web-01) to replicate from. 
 The script <a href="https://github.com/MicrQ/alx-system_engineering-devops/blob/master/0x14-mysql/createDatabase.sh">createDatabase.sh</a> creates a database named `tyrell_corp` and a table `nexus6` in the database. It also grants the user 'holberton_user' a select permission.<br>
 To check if the user `holberton_user` have the permission to select, run: `mysql -uholberton_user -p -e "use tyrell_corp; select * from nexus6"` on web-01.<br><br>
+To create a replica slave and everything related, checkout the file <a href="https://github.com/MicrQ/alx-system_engineering-devops/blob/master/0x14-mysql/createReplicaUserREADME">createReplicaUserREADME</a>
