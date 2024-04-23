@@ -20,7 +20,7 @@ if __name__ == "__main__":
             userTodos.append(todo)
 
     with open(sys.argv[1] + '.csv', 'w') as csvFile:
-        csvWrite = csv.writer(csvFile)
+        csvWrite = csv.writer(csvFile, quoting=csv.QUOTE_ALL)
 
         for todo in userTodos:
             row = [sys.argv[1], username]
