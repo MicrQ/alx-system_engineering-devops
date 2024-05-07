@@ -10,6 +10,6 @@ def number_of_subscribers(subreddit):
     url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
     res = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'},
                        allow_redirects=False)
-    if res.status_code == 200:
+    if res.status_code < 300:
         return res.json()['data']['subscribers']
     return 0
