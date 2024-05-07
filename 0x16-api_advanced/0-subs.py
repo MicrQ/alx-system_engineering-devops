@@ -7,10 +7,11 @@ def number_of_subscribers(subreddit):
         and returns the number of subscribers
     """
     import requests
+
     url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    res = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'},
+    res = requests.get(url, headers={'User-Agent': 'Some-User-Agent'},
                        allow_redirects=False)
-    if res.status_code < 300:
-        data = res.json().get('data')
-        return data.get('subscribers')
-    return 0
+    if res.status_code >= 300:
+        return 0
+    data = res.json().get('data')
+    return data.get('subscribers')
